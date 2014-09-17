@@ -9,6 +9,7 @@ WordsCtrl = (function() {
     this.scope = scope;
     this.Word = Word;
     this.Trie = Trie;
+    this.findByName = __bind(this.findByName, this);
     this.addWords = __bind(this.addWords, this);
     this.words = [];
     this.t = new this.Trie();
@@ -39,6 +40,24 @@ WordsCtrl = (function() {
     })(this));
   };
 
+  WordsCtrl.prototype.findByName = function(name) {
+    var item, result;
+    result = (function() {
+      var _i, _len, _ref, _results;
+      _ref = this.words;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        item = _ref[_i];
+        if (item.name === name) {
+          _results.push(item);
+        }
+      }
+      return _results;
+    }).call(this);
+    console.log(result[0].id);
+    return result[0].id;
+  };
+
   return WordsCtrl;
 
 })();
@@ -47,6 +66,13 @@ ShowWordCtrl = (function() {
   function ShowWordCtrl(scope, Word, routeParams) {
     this.scope = scope;
     this.Word = Word;
+    this.word = '';
+    this.Word.find(id).success((function(_this) {
+      return function(data) {
+        _this.word = data;
+        return console.log(_this.word);
+      };
+    })(this));
   }
 
   return ShowWordCtrl;

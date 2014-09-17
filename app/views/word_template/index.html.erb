@@ -1,22 +1,22 @@
-<h1>WordTemplate#index</h1>
+<h1>The Trie Factory</h1>
 
 <form ng-submit="words.addWords(newWord)">
   <input type="text" ng-model="newWord.name" ng-change="words.completeWord(newWord.name)">
-  {{words.comp}}
-
+  <button>Save Word</button>
   <div class="auto-complete">
-    <div ng-repeat="comp in words.completions">{{comp}}</div>
+    <div ng-repeat="comp in words.completions">
+      <a href="javascript:void(0)" ng-click="/words/{{words.findByName(comp)}}.json">{{comp}}</a>
+    </div>
   </div>
 
-  <input type="text" ng-model="newWord.description">
-  <button>Save Word</button>
 </form>
-<div class="words">
+<!-- <div class="words">
   <div ng-repeat="word in words.words">
     <a href="/words/{{word.id}}">id: {{word.id}} | {{word.name}}</a>
   </div>
-</div>
+</div> -->
 
+<div id="show-word">{{showWord.word.name}}</div>
 
 
 

@@ -1,3 +1,11 @@
 // Place all the styles related to the wordTemplate controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.auto-complete {
+  border: 1px solid #ccc;
+  width: 120px;
+  position:absolute;
+  top: 99px;
+  left: 10px;
+}

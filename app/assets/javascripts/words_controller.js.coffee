@@ -27,14 +27,20 @@ class WordsCtrl
       console.log @t
       @scope.newWord = {}
 
+  findByName: (name) =>
+    result = (item for item in @words when item.name is name)
+    console.log result[0].id
+    result[0].id
+
+
 
 class ShowWordCtrl
 
   constructor: (@scope, @Word, routeParams) ->
-
-  # @Word.find(id).success (data) =>
-  #   @word = data
-  #   console.log(@word)
+    @word = ''
+    @Word.find(id).success (data) =>
+      @word = data
+      console.log(@word)
 
 
 WordsCtrls.controller "WordsCtrl", ["$scope", "Word", "Trie", WordsCtrl]
