@@ -1,0 +1,21 @@
+<h1>WordTemplate#index</h1>
+
+<form ng-submit="words.addWord(newWord)">
+  <input type="text" ng-model="newWord.name" ng-keypress="words.completeWord()">
+
+  <div class="auto-complete">
+    <div ng-repeat="comp in words.completions">{{comp}}</div>
+  </div>
+
+  <input type="text" ng-model="newWord.description">
+  <button>Save Word</button>
+</form>
+<div class="words">
+  <div ng-repeat="word in words.words">
+    <a href="/words/{{word.id}}">id: {{word.id}} | {{word.name}}</a>
+  </div>
+</div>
+
+<div>{{showWord.word}}</div>
+
+
