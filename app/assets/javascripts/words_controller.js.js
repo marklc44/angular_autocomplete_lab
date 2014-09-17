@@ -26,9 +26,10 @@ WordsCtrl = (function() {
     })(this));
   }
 
-  completeWord = function() {
+  completeWord = function(word) {
     console.log(this.t);
-    return this.completions = this.t.autocomplete(this.newWord.name);
+    this.completions = this.t.autocomplete(word);
+    return console.log(this.completions);
   };
 
   WordsCtrl.prototype.addWords = function(word) {

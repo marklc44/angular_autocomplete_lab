@@ -15,9 +15,10 @@ class WordsCtrl
         @t.learn(word.name)
         console.log @t
 
-  completeWord = () ->
+  completeWord = (word) ->
     console.log @t
-    @completions = @t.autocomplete(@newWord.name)
+    @completions = @t.autocomplete(word)
+    console.log @completions
 
   addWords: (word) ->
     @Word.create(word).success (data) =>
