@@ -2,7 +2,7 @@ class WordsController < ApplicationController
 
   before_action :render_layout_if_html
 
-  respond_to :json, :html
+  respond_to :json
 
   def index
     respond_with Word.all

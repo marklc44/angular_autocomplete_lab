@@ -54,7 +54,6 @@ WordsCtrl = (function() {
       }
       return _results;
     }).call(this);
-    console.log(result[0].id);
     return result[0].id;
   };
 
@@ -64,13 +63,15 @@ WordsCtrl = (function() {
 
 ShowWordCtrl = (function() {
   function ShowWordCtrl(scope, Word, routeParams) {
+    var id;
     this.scope = scope;
     this.Word = Word;
     this.word = '';
+    id = routeParams.id;
     this.Word.find(id).success((function(_this) {
       return function(data) {
-        _this.word = data;
-        return console.log(_this.word);
+        console.log(data);
+        return _this.word = data;
       };
     })(this));
   }

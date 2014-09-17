@@ -7,7 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body ng-app="WordsApp">
-  <div ng-view> </div>
+  <header>
+    <h1>The Trie Factory</h1>
+  </header>
 
+  <div class="content">
+    <div ng-view> </div>
+  </div>
+  <footer class="footer"></footer>
 </body>
 </html>

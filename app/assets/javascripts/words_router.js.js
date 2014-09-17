@@ -12,8 +12,8 @@ Router = (function() {
     this.routeProvider.when("/", {
       templateUrl: "/word_template",
       controller: "WordsCtrl as words"
-    }).when("/words/:id", {
-      templateUrl: "/word_template",
+    }).when("/words/:id.json", {
+      templateUrl: "/word_template/show.html",
       controller: "ShowWordCtrl as showWord"
     });
     this.locationProvider.html5Mode(true);
