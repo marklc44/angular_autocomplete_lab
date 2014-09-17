@@ -13,18 +13,14 @@ class WordsCtrl
       @words.forEach (word) =>
         # console.log word
         @t.learn(word.name)
-        console.log @t
-
 
   completeWord: (word) ->
     @completions = @t.autoComplete(word)
-
 
   addWords: (word) =>
     @Word.create(word).success (data) =>
       @words.push(data)
       @t.learn(data.name)
-      console.log @t
       @scope.newWord = {}
 
   findByName: (name) =>
@@ -36,9 +32,8 @@ class ShowWordCtrl
 
   constructor: (@scope, @Word, routeParams) ->
     @word = ''
-    id = routeParams.id
+    id = routeParams.id.split('.')[0]
     @Word.find(id).success (data) =>
-      console.log(data)
       @word = data
 
 

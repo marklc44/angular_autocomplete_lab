@@ -2,7 +2,8 @@
 
 
   <form ng-submit="words.addWords(newWord)">
-    <input type="text" ng-model="newWord.name" ng-change="words.completeWord(newWord.name)">
+    <input type="text" ng-model="newWord.name" ng-change="words.completeWord(newWord.name)" placeholder="Word to add">
+    <input type="text" ng-model="newWord.description" placeholder="Fun description">
     <button>Save Word</button>
     <div class="auto-complete">
       <div class="item" ng-repeat="comp in words.completions">

@@ -12,7 +12,7 @@ Router = (function() {
     this.routeProvider.when("/", {
       templateUrl: "/word_template",
       controller: "WordsCtrl as words"
-    }).when("/words/:id.json", {
+    }).when("/words/:id", {
       templateUrl: "/word_template/show.html",
       controller: "ShowWordCtrl as showWord"
     });

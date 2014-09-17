@@ -18,8 +18,7 @@ WordsCtrl = (function() {
       return function(data) {
         _this.words = data;
         return _this.words.forEach(function(word) {
-          _this.t.learn(word.name);
-          return console.log(_this.t);
+          return _this.t.learn(word.name);
         });
       };
     })(this));
@@ -34,7 +33,6 @@ WordsCtrl = (function() {
       return function(data) {
         _this.words.push(data);
         _this.t.learn(data.name);
-        console.log(_this.t);
         return _this.scope.newWord = {};
       };
     })(this));
@@ -67,10 +65,9 @@ ShowWordCtrl = (function() {
     this.scope = scope;
     this.Word = Word;
     this.word = '';
-    id = routeParams.id;
+    id = routeParams.id.split('.')[0];
     this.Word.find(id).success((function(_this) {
       return function(data) {
-        console.log(data);
         return _this.word = data;
       };
     })(this));
