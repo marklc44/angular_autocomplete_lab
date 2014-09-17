@@ -9,21 +9,24 @@ class WordsCtrl
 
     @Word.all().success (data) =>
       @words = data
-      console.log(@words)
+      # console.log(@words)
       @words.forEach (word) =>
-        console.log word
+        # console.log word
         @t.learn(word.name)
         console.log @t
 
-  completeWord = (word) ->
-    console.log @t
-    @completions = @t.autocomplete(word)
-    console.log @completions
 
-  addWords: (word) ->
+  completeWord: (word) ->
+    @completions = @t.autoComplete(word)
+
+
+  addWords: (word) =>
     @Word.create(word).success (data) =>
       @words.push(data)
+      @t.learn(data.name)
+      console.log @t
       @scope.newWord = {}
+
 
 class ShowWordCtrl
 

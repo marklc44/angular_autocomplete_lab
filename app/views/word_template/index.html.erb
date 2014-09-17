@@ -1,8 +1,8 @@
 <h1>WordTemplate#index</h1>
 
-<form ng-submit="words.addWord(newWord)">
-  <input type="text" ng-model="words.newWord.name" ng-keydown="words.completeWord(words.newWord.name)">
-  <div>{{words.newWord.name}}</div>
+<form ng-submit="words.addWords(newWord)">
+  <input type="text" ng-model="newWord.name" ng-change="words.completeWord(newWord.name)">
+  {{words.comp}}
 
   <div class="auto-complete">
     <div ng-repeat="comp in words.completions">{{comp}}</div>
@@ -17,6 +17,6 @@
   </div>
 </div>
 
-<div>{{showWord.word}}</div>
+
 
 

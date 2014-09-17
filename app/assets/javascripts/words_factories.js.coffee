@@ -12,5 +12,8 @@ WordsFactories.factory "Word", ["$http", ($http) ->
     find: (id) ->
       console.log("id: ", id)
       $http.get("/words/#{id}.json")
+    ,
+    find_by_name: (name) ->
+
   }
 ]
