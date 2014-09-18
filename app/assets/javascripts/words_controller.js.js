@@ -5,17 +5,19 @@ var ShowWordCtrl, WordsCtrl, WordsCtrls,
 WordsCtrls = angular.module("WordsCtrls", []);
 
 WordsCtrl = (function() {
-  function WordsCtrl(scope, Word, Trie) {
+  function WordsCtrl(scope, resource, Trie) {
     this.scope = scope;
-    this.Word = Word;
+    this.resource = resource;
     this.Trie = Trie;
     this.findByName = __bind(this.findByName, this);
     this.addWords = __bind(this.addWords, this);
     this.words = [];
     this.t = new this.Trie();
     this.completions = [];
-    this.Word.all().success((function(_this) {
+    this.Word = this.resource("/words/:id.json", {});
+    this.Word.query((function(_this) {
       return function(data) {
+        console.log(data);
         _this.words = data;
         return _this.words.forEach(function(word) {
           return _this.t.learn(word.name);
@@ -29,7 +31,9 @@ WordsCtrl = (function() {
   };
 
   WordsCtrl.prototype.addWords = function(word) {
-    return this.Word.create(word).success((function(_this) {
+    return this.Word.save({
+      word: word
+    }, (function(_this) {
       return function(data) {
         _this.words.push(data);
         _this.t.learn(data.name);
@@ -60,13 +64,17 @@ WordsCtrl = (function() {
 })();
 
 ShowWordCtrl = (function() {
-  function ShowWordCtrl(scope, Word, routeParams) {
-    var id;
+  function ShowWordCtrl(scope, resource, routeParams) {
     this.scope = scope;
-    this.Word = Word;
+    this.resource = resource;
     this.word = '';
-    id = routeParams.id.split('.')[0];
-    this.Word.find(id).success((function(_this) {
+    this.id = routeParams.id;
+    this.Word = this.resource("/words/:id", {
+      id: this.id
+    });
+    this.Word.get({
+      id: this.id
+    }, (function(_this) {
       return function(data) {
         return _this.word = data;
       };
@@ -77,6 +85,6 @@ ShowWordCtrl = (function() {
 
 })();
 
-WordsCtrls.controller("WordsCtrl", ["$scope", "Word", "Trie", WordsCtrl]);
+WordsCtrls.controller("WordsCtrl", ["$scope", "$resource", "Trie", WordsCtrl]);
 
-WordsCtrls.controller("ShowWordCtrl", ["$scope", "Word", "$routeParams", ShowWordCtrl]);
+WordsCtrls.controller("ShowWordCtrl", ["$scope", "$resource", "$routeParams", ShowWordCtrl]);

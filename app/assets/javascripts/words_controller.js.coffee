@@ -2,23 +2,24 @@ WordsCtrls = angular.module "WordsCtrls", []
 
 class WordsCtrl
 
-  constructor: (@scope, @Word, @Trie) ->
+  constructor: (@scope, @resource, @Trie) ->
     @words = []
     @t = new @Trie()
     @completions = []
 
-    @Word.all().success (data) =>
+    @Word = @resource "/words/:id.json", {}
+
+    @Word.query (data) =>
+      console.log data
       @words = data
-      # console.log(@words)
       @words.forEach (word) =>
-        # console.log word
         @t.learn(word.name)
 
   completeWord: (word) ->
     @completions = @t.autoComplete(word)
 
   addWords: (word) =>
-    @Word.create(word).success (data) =>
+    @Word.save {word: word}, (data) =>
       @words.push(data)
       @t.learn(data.name)
       @scope.newWord = {}
@@ -30,13 +31,15 @@ class WordsCtrl
 
 class ShowWordCtrl
 
-  constructor: (@scope, @Word, routeParams) ->
+  constructor: (@scope, @resource, routeParams) ->
     @word = ''
-    id = routeParams.id.split('.')[0]
-    @Word.find(id).success (data) =>
+    @id = routeParams.id
+    @Word = @resource "/words/:id", {id: @id}
+
+    @Word.get {id: @id}, (data) =>
       @word = data
 
 
-WordsCtrls.controller "WordsCtrl", ["$scope", "Word", "Trie", WordsCtrl]
+WordsCtrls.controller "WordsCtrl", ["$scope", "$resource", "Trie", WordsCtrl]
 
-WordsCtrls.controller "ShowWordCtrl", ["$scope", "Word", "$routeParams", ShowWordCtrl]
+WordsCtrls.controller "ShowWordCtrl", ["$scope", "$resource", "$routeParams", ShowWordCtrl]

@@ -1,16 +1,7 @@
 WordsFactories = angular.module "WordsFactories", []
 
-WordsFactories.factory "Word", ["$http", ($http) ->
-  return {
-    all: ->
-      $http.get("/words.json")
-    ,
-    create: (word) ->
-      console.log("create run")
-      $http.post("/words.json", {word: word})
-    ,
-    find: (id) ->
-      console.log("id: ", id)
-      $http.get("/words/#{id}.json")
-  }
+WordsFactories.factory "Word", ["$resource", ($resource) ->
+  # replaced with ngResource
+  # will put ngResource back here to
+  # use in multiple controllers
 ]

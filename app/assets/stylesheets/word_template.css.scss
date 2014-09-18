@@ -21,11 +21,13 @@ header {
 }
 .auto-complete {
   border: 1px solid #ccc;
-  width: 123px;
+  width: 190px;
   position:absolute;
-  top: 10.2em;
+  top: 10.65em;
   left: 2.1em;
   background: white;
+  max-height: 10em;
+  overflow: scroll;
   .item {
     margin: 0.2em;
   }

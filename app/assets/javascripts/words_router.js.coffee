@@ -1,5 +1,6 @@
 WordsRouter = angular.module "WordsRouter", [
-  "ngRoute"
+  "ngRoute",
+  "ngResource"
 ]
 
 class Router
